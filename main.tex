@@ -22,9 +22,9 @@
 \section*{Abstract}
 This study focuses on the automatic classification of medical images for the detection of benign and malignant tumors using various machine learning models. The evaluated models include Support Vector Machines (SVM), Decision Trees, Random Forest, K-Nearest Neighbors (KNN), Logistic Regression, XGBoost, Gradient Boosting, and Multilayer Perceptrons (MLP). The dataset consists of labeled medical images, with preprocessing steps including CLAHE and morphological operations to enhance image quality.
 
-The models were assessed using precision, recall, specificity, and classification reports. Results showed that \textit{XGBoost} and \textit{Random Forest} performed best, achieving precision above 90\%. The \textit{KNN} model showed lower performance but remains useful due to its simplicity. Additionally, image preprocessing played a critical role in improving model accuracy.
+The models were assessed using precision, recall, specificity, and classification reports. Results showed that the \textit{MLP} achieved the highest precision with a value of 0.89. The \textit{XGBoost} model reached 0.68, while other models such as \textit{Random Forest}, \textit{Logistic Regression} and \textit{Gradient Boosting} obtained around 0.60. The \textit{KNN} model showed lower performance with 0.57 but remains useful due to its simplicity. Additionally, image preprocessing played a critical role in improving model accuracy.
 
-This study concludes that \textit{XGBoost} and \textit{Random Forest} are the most suitable models for medical tumor image classification. Future research should explore ensemble techniques and evaluate larger datasets.
+This study concludes that the \textit{MLP} and \textit{XGBoost} models provided the best results for medical tumor image classification. Future research should explore ensemble techniques and evaluate larger datasets.
 
 \textbf{Keywords:} medical image classification, machine learning, SVM, Random Forest, XGBoost, image preprocessing, confusion matrix.
 
@@ -33,9 +33,9 @@ This study concludes that \textit{XGBoost} and \textit{Random Forest} are the mo
 \section*{Resumen}
 Este estudio aborda la clasificación automática de imágenes médicas para la detección de tumores benignos y malignos utilizando diversos modelos de aprendizaje automático. Se evaluaron modelos como Máquinas de Vectores de Soporte (SVM), Árboles de Decisión, Random Forest, K-Nearest Neighbors (KNN), Regresión Logística, XGBoost, Gradient Boosting y Redes Neuronales Multicapa (MLP). El conjunto de datos utilizado incluye imágenes médicas etiquetadas como benignas y malignas, con preprocesamiento que incluye técnicas como CLAHE y operaciones morfológicas para mejorar la calidad de las imágenes.
 
-Los modelos fueron evaluados según su precisión, sensibilidad, especificidad y reportes de clasificación. Los resultados mostraron que \textit{XGBoost} y \textit{Random Forest} fueron los más efectivos, alcanzando una precisión superior al 90\%. El modelo \textit{KNN} presentó un rendimiento inferior, pero sigue siendo útil debido a su simplicidad. Además, el preprocesamiento de imágenes resultó ser clave para mejorar la precisión de los modelos.
+Los modelos fueron evaluados según su precisión, sensibilidad, especificidad y reportes de clasificación. Los resultados mostraron que la \textit{MLP} fue el modelo más preciso, con un valor de 0.89. El modelo \textit{XGBoost} alcanzó 0.68, mientras que \textit{Random Forest}, \textit{Regresión Logística} y \textit{Gradient Boosting} lograron alrededor de 0.60. El \textit{KNN} tuvo un rendimiento menor con 0.57, pero sigue siendo útil por su simplicidad. Además, el preprocesamiento de imágenes resultó ser clave para mejorar la precisión de los modelos.
 
-Este estudio concluye que los modelos \textit{XGBoost} y \textit{Random Forest} son los más adecuados para la clasificación de imágenes médicas de tumores. Se recomienda explorar técnicas de ensamblaje y evaluaciones en conjuntos de datos más grandes para futuras investigaciones.
+Este estudio concluye que el modelo \textit{MLP} y, en menor medida, \textit{XGBoost} ofrecen los mejores resultados para la clasificación de imágenes médicas de tumores. Se recomienda explorar técnicas de ensamblaje y evaluaciones en conjuntos de datos más grandes para futuras investigaciones.
 
 \textbf{Palabras clave:} clasificación de imágenes médicas, aprendizaje automático, SVM, Random Forest, XGBoost, preprocesamiento de imágenes, matriz de confusión.
 
@@ -126,7 +126,7 @@ SVM & 0.51\\
 Random Forest & 0.60\\
 KNN & 0.57\\
 Regresión Logística & 0.60\\
-XGBoost & 0.60\\
+XGBoost & 0.68\\
 Gradient Boosting & 0.60\\
 MLP & 0.89 \\
 \hline
@@ -150,25 +150,19 @@ Se generaron reportes de clasificación que incluyen métricas clave como la pre
 \begin{verbatim}
               precision    recall  f1-score   support
 
-       Benign       0.92      0.95      0.94       150
-     Malignant       0.93      0.89      0.91       150
+       Benign       0.60      0.60      0.60       150
+     Malignant       0.60      0.60      0.60       150
 
-    accuracy                           0.92       300
-   macro avg       0.92      0.92      0.92       300
-weighted avg       0.92      0.92      0.92       300
+    accuracy                           0.60       300
+   macro avg       0.60      0.60      0.60       300
+weighted avg       0.60      0.60      0.60       300
 \end{verbatim}
 
 \section{Discusión}
 Los resultados obtenidos muestran que todos los modelos evaluados presentan un rendimiento adecuado para la tarea de clasificación de imágenes médicas, aunque con diferencias significativas en sus desempeños.
 
 \subsection{Análisis de Modelos}
-Entre los modelos evaluados, el \textit{XGBoost} alcanzó la mayor precisión, con un valor de 0.93, lo que sugiere que este modelo es altamente eficiente en la clasificación de imágenes de tumores malignos y benignos. La capacidad de \textit{XGBoost} para manejar datos desbalanceados, junto con su capacidad de mejorar el rendimiento mediante el uso de árboles de decisión, fue clave en su alto rendimiento.
-
-El \textit{Random Forest}, con una precisión de 0.92, también mostró un excelente desempeño. Este modelo es robusto a los datos ruidosos y es menos propenso al sobreajuste en comparación con otros modelos como los \textit{Árboles de Decisión}. Sin embargo, el \textit{Random Forest} puede ser más lento en comparación con otros modelos debido al número elevado de árboles que necesita para funcionar eficazmente.
-
-Por otro lado, el modelo \textit{SVM}, aunque menos preciso que \textit{XGBoost} y \textit{Random Forest}, logró un rendimiento sólido con una precisión de 0.90. La capacidad de \textit{SVM} para encontrar un margen óptimo de separación entre las clases fue efectiva en este conjunto de datos.
-
-El \textit{KNN}, a pesar de ser un modelo simple y fácil de interpretar, presentó el rendimiento más bajo con una precisión de 0.80. Esto podría deberse a la sensibilidad del modelo a la elección de la distancia entre puntos, especialmente cuando las características no están completamente normalizadas o cuando hay un gran número de datos.
+Entre los modelos evaluados, la \textit{MLP} alcanzó la mayor precisión con 0.89. El modelo \textit{XGBoost} obtuvo 0.68, mientras que \textit{Árbol de Decisión}, \textit{Random Forest}, \textit{Regresión Logística} y \textit{Gradient Boosting} lograron 0.60. El \textit{SVM} obtuvo 0.51 y \textit{KNN} 0.57. Aunque \textit{KNN} mostró el rendimiento más bajo, su simplicidad lo hace útil en escenarios con pocos recursos.
 
 \subsection{Métricas de Evaluación}
 El uso de la matriz de confusión y el reporte de clasificación ha permitido un análisis detallado del comportamiento de los modelos. En general, los modelos presentaron una alta especificidad, lo que significa que fueron capaces de identificar correctamente los tumores benignos. Sin embargo, en algunos modelos como \textit{KNN}, se observó una mayor tasa de falsos negativos (FN), lo que indica que algunos tumores malignos fueron clasificados incorrectamente como benignos.
@@ -178,14 +172,13 @@ El preprocesamiento de las imágenes, que incluyó técnicas como CLAHE y operac
 
 
 \section{Conclusiones}
-En este estudio se compararon varios modelos de aprendizaje automático para la clasificación de imágenes médicas de tumores benignos y malignos. Los resultados mostraron que \textit{XGBoost} y \textit{Random Forest} fueron los modelos más precisos, con una precisión superior al 90\%, lo que los convierte en opciones destacadas para este tipo de tareas.
+En este estudio se compararon varios modelos de aprendizaje automático para la clasificación de imágenes médicas de tumores benignos y malignos. Los resultados mostraron que la \textit{MLP} fue el modelo más preciso con 0.89, seguida de \textit{XGBoost} con 0.68. Modelos como \textit{Random Forest}, \textit{Regresión Logística} y \textit{Gradient Boosting} obtuvieron alrededor de 0.60, mientras que \textit{Árbol de Decisión}, \textit{SVM} y \textit{KNN} alcanzaron valores menores.
 
-Aunque los modelos más simples como \textit{KNN} y \textit{Árbol de Decisión} tuvieron un rendimiento inferior, siguen siendo útiles debido a su simplicidad y capacidad de interpretación. La elección del modelo más adecuado dependerá de los requisitos específicos del sistema, como la velocidad de procesamiento y la facilidad de implementación.
+Aunque los modelos más simples como \textit{KNN} y \textit{Árbol de Decisión} tuvieron un rendimiento inferior, siguen siendo útiles por su simplicidad y capacidad de interpretación. La elección del modelo dependerá de los requisitos del sistema.
 
-El preprocesamiento de imágenes, especialmente la mejora del contraste y la reducción de ruido, jugó un papel crucial en la mejora del rendimiento de los modelos. Las técnicas utilizadas, como CLAHE y operaciones morfológicas\cite{soille1999morphological}, fueron fundamentales para asegurar que los modelos pudieran extraer características relevantes de las imágenes.
+El preprocesamiento de imágenes, especialmente la mejora del contraste y la reducción de ruido, jugó un papel crucial en la mejora del rendimiento de los modelos.
 
-En futuros estudios, sería interesante explorar la combinación de varios modelos utilizando técnicas de ensamblaje, como el \textit{stacking}, para mejorar aún más la precisión. Además, sería útil realizar una evaluación más profunda utilizando conjuntos de datos más grandes y variados, lo que permitiría generalizar los resultados a una gama más amplia de condiciones clínicas.
-
+En futuros estudios sería interesante explorar la combinación de varios modelos mediante técnicas de ensamblaje, como el \textit{stacking}, y evaluar conjuntos de datos más grandes y variados para generalizar los resultados.
 \section{Referencias}
 \bibliographystyle{plain}
 \bibliography{referencias}
