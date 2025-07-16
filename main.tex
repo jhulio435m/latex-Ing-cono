@@ -10,8 +10,8 @@
 % Configuración de márgenes
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 
-\title{Análisis de Modelos de Aprendizaje Automático para Clasificación de Imágenes Médicas}
-\author{Tu Nombre \\ Tu Universidad}
+\title{Universidad Nacional del Centro del Perú \\ \vspace{1em} Análisis de Modelos de Aprendizaje Automático para Clasificación de Imágenes Médicas}
+\author{Morán de la Cruz Jhulio Alessandro \\ Palomino Chacón Hernando \\ Cesar Mendoza}
 \date{\today}
 
 \begin{document}
@@ -44,7 +44,7 @@ El análisis de imágenes médicas ha sido un área clave en la medicina moderna
 
 En este contexto, la clasificación de imágenes de tumores benignos y malignos ha sido uno de los problemas más estudiados. Estas imágenes, a menudo obtenidas mediante tecnologías de diagnóstico como la resonancia magnética (RM), la tomografía computarizada (TC) o el ultrasonido, requieren un procesamiento y análisis detallado para ser clasificadas correctamente. Sin embargo, debido a la complejidad y variabilidad de las imágenes, el proceso manual puede ser propenso a errores y requiere de una gran cantidad de tiempo y recursos.
 
-El aprendizaje automático, y más específicamente los modelos de clasificación supervisados, ha demostrado ser eficaz para abordar estos desafíos. Estos modelos, entrenados con grandes conjuntos de datos etiquetados, pueden aprender patrones en las imágenes que son difíciles de identificar para los seres humanos. En particular, las técnicas como las Máquinas de Vectores de Soporte (SVM), los Árboles de Decisión, Random Forest, K-Nearest Neighbors (KNN), y las Redes Neuronales Multicapa (MLP) han sido ampliamente utilizadas para la clasificación de imágenes médicas, mostrando un rendimiento prometedor en términos de precisión y velocidad de procesamiento.
+El aprendizaje automático, y más específicamente los modelos de clasificación supervisados, ha demostrado ser eficaz para abordar estos desafíos\cite{litjens2017survey}. Estos modelos, entrenados con grandes conjuntos de datos etiquetados, pueden aprender patrones en las imágenes que son difíciles de identificar para los seres humanos. En particular, las técnicas como las Máquinas de Vectores de Soporte (SVM), los Árboles de Decisión, Random Forest, K-Nearest Neighbors (KNN), y las Redes Neuronales Multicapa (MLP) han sido ampliamente utilizadas para la clasificación de imágenes médicas, mostrando un rendimiento prometedor en términos de precisión y velocidad de procesamiento.
 
 Este trabajo tiene como objetivo comparar el rendimiento de varios modelos de aprendizaje automático en un conjunto de datos de imágenes médicas que contienen imágenes de tumores benignos y malignos. Los modelos evaluados incluyen SVM, Árbol de Decisión, Random Forest, KNN, Regresión Logística, XGBoost, Gradient Boosting y MLP. Además de la precisión, se utilizarán métricas como la matriz de confusión y el reporte de clasificación para evaluar el desempeño de los modelos en términos de su capacidad para distinguir entre tumores benignos y malignos. 
 
@@ -57,18 +57,18 @@ El aprendizaje automático (ML) es una rama de la inteligencia artificial que pe
 \subsection{Modelos de Clasificación}
 Existen diversos modelos de clasificación que se han aplicado con éxito a la clasificación de imágenes médicas. Entre los más populares se incluyen:
 \begin{itemize}
-    \item \textbf{Máquinas de Vectores de Soporte (SVM)}: Un clasificador robusto que busca la frontera de separación óptima entre clases utilizando un espacio de características de alta dimensión.
-    \item \textbf{Árboles de Decisión}: Un modelo basado en decisiones binarias que segmenta los datos en función de características específicas. Es fácil de interpretar pero puede ser propenso al sobreajuste si no se controla adecuadamente.
-    \item \textbf{Random Forest}: Una extensión de los árboles de decisión que utiliza múltiples árboles para mejorar la precisión y reducir el riesgo de sobreajuste.
-    \item \textbf{K-Nearest Neighbors (KNN)}: Un modelo basado en la similitud, donde la clasificación de un punto se determina por los puntos más cercanos en el espacio de características.
-    \item \textbf{Redes Neuronales Multicapa (MLP)}: Modelos de redes neuronales profundas que pueden aprender representaciones complejas de los datos y son especialmente útiles en tareas de clasificación no lineales.
-    \item \textbf{XGBoost y Gradient Boosting}: Métodos de ensamblaje que combinan múltiples modelos débiles (como árboles de decisión) para formar un modelo fuerte y robusto.
+    \item \textbf{Máquinas de Vectores de Soporte (SVM)}\cite{cortes1995support}: Un clasificador robusto que busca la frontera de separación óptima entre clases utilizando un espacio de características de alta dimensión.
+    \item \textbf{Árboles de Decisión}\cite{quinlan1986induction}: Un modelo basado en decisiones binarias que segmenta los datos en función de características específicas. Es fácil de interpretar pero puede ser propenso al sobreajuste si no se controla adecuadamente.
+    \item \textbf{Random Forest}\cite{breiman2001random}: Una extensión de los árboles de decisión que utiliza múltiples árboles para mejorar la precisión y reducir el riesgo de sobreajuste.
+    \item \textbf{K-Nearest Neighbors (KNN)}\cite{cover1967nearest}: Un modelo basado en la similitud, donde la clasificación de un punto se determina por los puntos más cercanos en el espacio de características.
+    \item \textbf{Redes Neuronales Multicapa (MLP)}\cite{rumelhart1986learning}: Modelos de redes neuronales profundas que pueden aprender representaciones complejas de los datos y son especialmente útiles en tareas de clasificación no lineales.
+    \item \textbf{XGBoost y Gradient Boosting}\cite{chen2016xgboost,friedman2001greedy}: Métodos de ensamblaje que combinan múltiples modelos débiles (como árboles de decisión) para formar un modelo fuerte y robusto.
 \end{itemize}
 
 Cada uno de estos modelos tiene sus ventajas y limitaciones, y la elección de un modelo adecuado depende de factores como el tamaño del conjunto de datos, la complejidad de las imágenes y la capacidad computacional disponible.
 
 \subsection{Preprocesamiento de Imágenes}
-El preprocesamiento de imágenes es un paso crucial para mejorar la calidad de los datos y, por lo tanto, el rendimiento de los modelos de clasificación. Técnicas como el aumento de contraste mediante el uso de CLAHE (Contrast Limited Adaptive Histogram Equalization), y operaciones morfológicas como la apertura y cierre, son utilizadas para mejorar las características relevantes de las imágenes. Además, la redimensión de las imágenes a tamaños uniformes es fundamental para reducir la variabilidad en los datos de entrada.
+El preprocesamiento de imágenes es un paso crucial para mejorar la calidad de los datos y, por lo tanto, el rendimiento de los modelos de clasificación. Técnicas como el aumento de contraste mediante el uso de CLAHE (Contrast Limited Adaptive Histogram Equalization)\cite{pizer1987adaptive}, y operaciones morfológicas como la apertura y cierre, son utilizadas para mejorar las características relevantes de las imágenes. Además, la redimensión de las imágenes a tamaños uniformes es fundamental para reducir la variabilidad en los datos de entrada.
 
 \subsection{Métricas de Evaluación}
 Las métricas de evaluación como la \textit{precisión}, \textit{sensibilidad}, \textit{especificidad}, la \textit{matriz de confusión} y el \textit{reporte de clasificación} son fundamentales para medir el rendimiento de los modelos. Estas métricas permiten evaluar no solo la exactitud global, sino también el comportamiento de los modelos en cuanto a la correcta identificación de tumores benignos y malignos.
@@ -83,25 +83,25 @@ El conjunto de datos utilizado contiene imágenes de tumores, etiquetados como \
 Cada imagen se procesa individualmente utilizando una serie de técnicas:
 \begin{itemize}
     \item \textbf{Redimensión de Imágenes}: Las imágenes se redimensionan a un tamaño uniforme de $128 \times 128$ píxeles para que puedan ser procesadas por los modelos.
-    \item \textbf{Ecualización de Histograma CLAHE}: Se aplica CLAHE para mejorar el contraste de las imágenes y resaltar las características relevantes.
-    \item \textbf{Operaciones Morfológicas}: Se aplican técnicas de apertura y cierre para reducir el ruido y mejorar la estructura de las imágenes.
+    \item \textbf{Ecualización de Histograma CLAHE}\cite{pizer1987adaptive}: Se aplica CLAHE para mejorar el contraste de las imágenes y resaltar las características relevantes.
+    \item \textbf{Operaciones Morfológicas\cite{soille1999morphological}}: Se aplican técnicas de apertura y cierre para reducir el ruido y mejorar la estructura de las imágenes.
     \item \textbf{Laplaciano}: Se aplica la operación de Laplace para resaltar los bordes y detalles importantes.
 \end{itemize}
 
 \subsection{Extracción de Características}
-Las características de cada imagen se extraen utilizando el descriptor de características HOG (Histogram of Oriented Gradients). HOG es útil para la detección de objetos y bordes, lo que lo convierte en una opción adecuada para la clasificación de imágenes médicas.
+Las características de cada imagen se extraen utilizando el descriptor de características HOG (Histogram of Oriented Gradients)\cite{dalal2005histograms}. HOG es útil para la detección de objetos y bordes, lo que lo convierte en una opción adecuada para la clasificación de imágenes médicas.
 
 \subsection{Entrenamiento de Modelos}
 Se entrenan varios modelos de clasificación utilizando los datos preprocesados y las características extraídas. Los modelos seleccionados incluyen:
 \begin{itemize}
-    \item \textbf{Máquinas de Vectores de Soporte (SVM)}
-    \item \textbf{Árboles de Decisión}
-    \item \textbf{Random Forest}
-    \item \textbf{K-Nearest Neighbors (KNN)}
-    \item \textbf{Regresión Logística}
-    \item \textbf{XGBoost}
-    \item \textbf{Gradient Boosting}
-    \item \textbf{Redes Neuronales (MLP)}
+    \item \textbf{Máquinas de Vectores de Soporte (SVM)}\cite{cortes1995support}
+    \item \textbf{Árboles de Decisión}\cite{quinlan1986induction}
+    \item \textbf{Random Forest}\cite{breiman2001random}
+    \item \textbf{K-Nearest Neighbors (KNN)}\cite{cover1967nearest}
+    \item \textbf{Regresión Logística}\cite{cox1958regression}
+    \item \textbf{XGBoost}\cite{chen2016xgboost}
+    \item \textbf{Gradient Boosting}\cite{friedman2001greedy}
+    \item \textbf{Redes Neuronales (MLP)}\cite{rumelhart1986learning}
 \end{itemize}
 Cada modelo es optimizado utilizando la búsqueda en cuadrícula de hiperparámetros.
 
@@ -174,7 +174,7 @@ El \textit{KNN}, a pesar de ser un modelo simple y fácil de interpretar, presen
 El uso de la matriz de confusión y el reporte de clasificación ha permitido un análisis detallado del comportamiento de los modelos. En general, los modelos presentaron una alta especificidad, lo que significa que fueron capaces de identificar correctamente los tumores benignos. Sin embargo, en algunos modelos como \textit{KNN}, se observó una mayor tasa de falsos negativos (FN), lo que indica que algunos tumores malignos fueron clasificados incorrectamente como benignos.
 
 \subsection{Impacto del Preprocesamiento}
-El preprocesamiento de las imágenes, que incluyó técnicas como CLAHE y operaciones morfológicas, fue fundamental para mejorar la calidad de las imágenes y ayudar a los modelos a extraer características relevantes. Este paso de preprocesamiento ayudó a reducir el ruido en las imágenes y a resaltar detalles importantes, mejorando así la precisión de los modelos.
+El preprocesamiento de las imágenes, que incluyó técnicas como CLAHE y operaciones morfológicas\cite{soille1999morphological}, fue fundamental para mejorar la calidad de las imágenes y ayudar a los modelos a extraer características relevantes. Este paso de preprocesamiento ayudó a reducir el ruido en las imágenes y a resaltar detalles importantes, mejorando así la precisión de los modelos.
 
 
 \section{Conclusiones}
@@ -182,7 +182,7 @@ En este estudio se compararon varios modelos de aprendizaje automático para la 
 
 Aunque los modelos más simples como \textit{KNN} y \textit{Árbol de Decisión} tuvieron un rendimiento inferior, siguen siendo útiles debido a su simplicidad y capacidad de interpretación. La elección del modelo más adecuado dependerá de los requisitos específicos del sistema, como la velocidad de procesamiento y la facilidad de implementación.
 
-El preprocesamiento de imágenes, especialmente la mejora del contraste y la reducción de ruido, jugó un papel crucial en la mejora del rendimiento de los modelos. Las técnicas utilizadas, como CLAHE y operaciones morfológicas, fueron fundamentales para asegurar que los modelos pudieran extraer características relevantes de las imágenes.
+El preprocesamiento de imágenes, especialmente la mejora del contraste y la reducción de ruido, jugó un papel crucial en la mejora del rendimiento de los modelos. Las técnicas utilizadas, como CLAHE y operaciones morfológicas\cite{soille1999morphological}, fueron fundamentales para asegurar que los modelos pudieran extraer características relevantes de las imágenes.
 
 En futuros estudios, sería interesante explorar la combinación de varios modelos utilizando técnicas de ensamblaje, como el \textit{stacking}, para mejorar aún más la precisión. Además, sería útil realizar una evaluación más profunda utilizando conjuntos de datos más grandes y variados, lo que permitiría generalizar los resultados a una gama más amplia de condiciones clínicas.
 
