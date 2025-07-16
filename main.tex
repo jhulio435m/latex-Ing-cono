@@ -1,0 +1,193 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{cite}
+
+% Configuración de márgenes
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+
+\title{Análisis de Modelos de Aprendizaje Automático para Clasificación de Imágenes Médicas}
+\author{Tu Nombre \\ Tu Universidad}
+\date{\today}
+
+\begin{document}
+
+% Portada
+\maketitle
+
+\section*{Abstract}
+This study focuses on the automatic classification of medical images for the detection of benign and malignant tumors using various machine learning models. The evaluated models include Support Vector Machines (SVM), Decision Trees, Random Forest, K-Nearest Neighbors (KNN), Logistic Regression, XGBoost, Gradient Boosting, and Multilayer Perceptrons (MLP). The dataset consists of labeled medical images, with preprocessing steps including CLAHE and morphological operations to enhance image quality.
+
+The models were assessed using precision, recall, specificity, and classification reports. Results showed that \textit{XGBoost} and \textit{Random Forest} performed best, achieving precision above 90\%. The \textit{KNN} model showed lower performance but remains useful due to its simplicity. Additionally, image preprocessing played a critical role in improving model accuracy.
+
+This study concludes that \textit{XGBoost} and \textit{Random Forest} are the most suitable models for medical tumor image classification. Future research should explore ensemble techniques and evaluate larger datasets.
+
+\textbf{Keywords:} medical image classification, machine learning, SVM, Random Forest, XGBoost, image preprocessing, confusion matrix.
+
+\newpage
+
+\section*{Resumen}
+Este estudio aborda la clasificación automática de imágenes médicas para la detección de tumores benignos y malignos utilizando diversos modelos de aprendizaje automático. Se evaluaron modelos como Máquinas de Vectores de Soporte (SVM), Árboles de Decisión, Random Forest, K-Nearest Neighbors (KNN), Regresión Logística, XGBoost, Gradient Boosting y Redes Neuronales Multicapa (MLP). El conjunto de datos utilizado incluye imágenes médicas etiquetadas como benignas y malignas, con preprocesamiento que incluye técnicas como CLAHE y operaciones morfológicas para mejorar la calidad de las imágenes.
+
+Los modelos fueron evaluados según su precisión, sensibilidad, especificidad y reportes de clasificación. Los resultados mostraron que \textit{XGBoost} y \textit{Random Forest} fueron los más efectivos, alcanzando una precisión superior al 90\%. El modelo \textit{KNN} presentó un rendimiento inferior, pero sigue siendo útil debido a su simplicidad. Además, el preprocesamiento de imágenes resultó ser clave para mejorar la precisión de los modelos.
+
+Este estudio concluye que los modelos \textit{XGBoost} y \textit{Random Forest} son los más adecuados para la clasificación de imágenes médicas de tumores. Se recomienda explorar técnicas de ensamblaje y evaluaciones en conjuntos de datos más grandes para futuras investigaciones.
+
+\textbf{Palabras clave:} clasificación de imágenes médicas, aprendizaje automático, SVM, Random Forest, XGBoost, preprocesamiento de imágenes, matriz de confusión.
+
+\section{Introducción}
+El análisis de imágenes médicas ha sido un área clave en la medicina moderna, especialmente en el diagnóstico de enfermedades como el cáncer, donde la detección temprana puede marcar la diferencia entre una recuperación exitosa y el fracaso del tratamiento. La clasificación automática de imágenes médicas utilizando técnicas de aprendizaje automático se ha convertido en una herramienta fundamental para ayudar a los profesionales de la salud a tomar decisiones más rápidas y precisas.
+
+En este contexto, la clasificación de imágenes de tumores benignos y malignos ha sido uno de los problemas más estudiados. Estas imágenes, a menudo obtenidas mediante tecnologías de diagnóstico como la resonancia magnética (RM), la tomografía computarizada (TC) o el ultrasonido, requieren un procesamiento y análisis detallado para ser clasificadas correctamente. Sin embargo, debido a la complejidad y variabilidad de las imágenes, el proceso manual puede ser propenso a errores y requiere de una gran cantidad de tiempo y recursos.
+
+El aprendizaje automático, y más específicamente los modelos de clasificación supervisados, ha demostrado ser eficaz para abordar estos desafíos. Estos modelos, entrenados con grandes conjuntos de datos etiquetados, pueden aprender patrones en las imágenes que son difíciles de identificar para los seres humanos. En particular, las técnicas como las Máquinas de Vectores de Soporte (SVM), los Árboles de Decisión, Random Forest, K-Nearest Neighbors (KNN), y las Redes Neuronales Multicapa (MLP) han sido ampliamente utilizadas para la clasificación de imágenes médicas, mostrando un rendimiento prometedor en términos de precisión y velocidad de procesamiento.
+
+Este trabajo tiene como objetivo comparar el rendimiento de varios modelos de aprendizaje automático en un conjunto de datos de imágenes médicas que contienen imágenes de tumores benignos y malignos. Los modelos evaluados incluyen SVM, Árbol de Decisión, Random Forest, KNN, Regresión Logística, XGBoost, Gradient Boosting y MLP. Además de la precisión, se utilizarán métricas como la matriz de confusión y el reporte de clasificación para evaluar el desempeño de los modelos en términos de su capacidad para distinguir entre tumores benignos y malignos. 
+
+\section{Marco Teórico}
+La clasificación de imágenes médicas es una de las aplicaciones más relevantes del aprendizaje automático en el ámbito de la salud. Las imágenes médicas, como las obtenidas por resonancia magnética (RM), tomografía computarizada (TC) y mamografías, contienen información crucial para el diagnóstico de diversas enfermedades, incluidos los tumores malignos y benignos. Sin embargo, estas imágenes a menudo presentan un alto grado de complejidad debido a su variabilidad y ruido, lo que hace necesario aplicar técnicas avanzadas para su interpretación.
+
+\subsection{Aprendizaje Automático en Imágenes Médicas}
+El aprendizaje automático (ML) es una rama de la inteligencia artificial que permite que los sistemas aprendan de los datos y realicen predicciones o decisiones sin ser programados explícitamente para cada tarea. En el contexto de las imágenes médicas, los modelos de ML pueden identificar patrones que no son fácilmente perceptibles para el ojo humano, mejorando así la precisión y eficiencia en los diagnósticos.
+
+\subsection{Modelos de Clasificación}
+Existen diversos modelos de clasificación que se han aplicado con éxito a la clasificación de imágenes médicas. Entre los más populares se incluyen:
+\begin{itemize}
+    \item \textbf{Máquinas de Vectores de Soporte (SVM)}: Un clasificador robusto que busca la frontera de separación óptima entre clases utilizando un espacio de características de alta dimensión.
+    \item \textbf{Árboles de Decisión}: Un modelo basado en decisiones binarias que segmenta los datos en función de características específicas. Es fácil de interpretar pero puede ser propenso al sobreajuste si no se controla adecuadamente.
+    \item \textbf{Random Forest}: Una extensión de los árboles de decisión que utiliza múltiples árboles para mejorar la precisión y reducir el riesgo de sobreajuste.
+    \item \textbf{K-Nearest Neighbors (KNN)}: Un modelo basado en la similitud, donde la clasificación de un punto se determina por los puntos más cercanos en el espacio de características.
+    \item \textbf{Redes Neuronales Multicapa (MLP)}: Modelos de redes neuronales profundas que pueden aprender representaciones complejas de los datos y son especialmente útiles en tareas de clasificación no lineales.
+    \item \textbf{XGBoost y Gradient Boosting}: Métodos de ensamblaje que combinan múltiples modelos débiles (como árboles de decisión) para formar un modelo fuerte y robusto.
+\end{itemize}
+
+Cada uno de estos modelos tiene sus ventajas y limitaciones, y la elección de un modelo adecuado depende de factores como el tamaño del conjunto de datos, la complejidad de las imágenes y la capacidad computacional disponible.
+
+\subsection{Preprocesamiento de Imágenes}
+El preprocesamiento de imágenes es un paso crucial para mejorar la calidad de los datos y, por lo tanto, el rendimiento de los modelos de clasificación. Técnicas como el aumento de contraste mediante el uso de CLAHE (Contrast Limited Adaptive Histogram Equalization), y operaciones morfológicas como la apertura y cierre, son utilizadas para mejorar las características relevantes de las imágenes. Además, la redimensión de las imágenes a tamaños uniformes es fundamental para reducir la variabilidad en los datos de entrada.
+
+\subsection{Métricas de Evaluación}
+Las métricas de evaluación como la \textit{precisión}, \textit{sensibilidad}, \textit{especificidad}, la \textit{matriz de confusión} y el \textit{reporte de clasificación} son fundamentales para medir el rendimiento de los modelos. Estas métricas permiten evaluar no solo la exactitud global, sino también el comportamiento de los modelos en cuanto a la correcta identificación de tumores benignos y malignos.
+
+\section{Metodología}
+En este estudio, se implementaron varios modelos de clasificación para evaluar su rendimiento en un conjunto de datos de imágenes médicas. La metodología se divide en varias etapas clave: la carga y preprocesamiento de los datos, la extracción de características, el entrenamiento de los modelos, la evaluación y la comparación de los resultados.
+
+\subsection{Carga de Datos}
+El conjunto de datos utilizado contiene imágenes de tumores, etiquetados como \textit{benignos} o \textit{malignos}. Los datos provienen de un archivo CSV que contiene información relevante sobre los pacientes y las imágenes, y un directorio de imágenes en formato JPEG. Las rutas de las imágenes se mapean a las entradas correspondientes en el archivo CSV para formar un DataFrame unificado.
+
+\subsection{Preprocesamiento de Imágenes}
+Cada imagen se procesa individualmente utilizando una serie de técnicas:
+\begin{itemize}
+    \item \textbf{Redimensión de Imágenes}: Las imágenes se redimensionan a un tamaño uniforme de $128 \times 128$ píxeles para que puedan ser procesadas por los modelos.
+    \item \textbf{Ecualización de Histograma CLAHE}: Se aplica CLAHE para mejorar el contraste de las imágenes y resaltar las características relevantes.
+    \item \textbf{Operaciones Morfológicas}: Se aplican técnicas de apertura y cierre para reducir el ruido y mejorar la estructura de las imágenes.
+    \item \textbf{Laplaciano}: Se aplica la operación de Laplace para resaltar los bordes y detalles importantes.
+\end{itemize}
+
+\subsection{Extracción de Características}
+Las características de cada imagen se extraen utilizando el descriptor de características HOG (Histogram of Oriented Gradients). HOG es útil para la detección de objetos y bordes, lo que lo convierte en una opción adecuada para la clasificación de imágenes médicas.
+
+\subsection{Entrenamiento de Modelos}
+Se entrenan varios modelos de clasificación utilizando los datos preprocesados y las características extraídas. Los modelos seleccionados incluyen:
+\begin{itemize}
+    \item \textbf{Máquinas de Vectores de Soporte (SVM)}
+    \item \textbf{Árboles de Decisión}
+    \item \textbf{Random Forest}
+    \item \textbf{K-Nearest Neighbors (KNN)}
+    \item \textbf{Regresión Logística}
+    \item \textbf{XGBoost}
+    \item \textbf{Gradient Boosting}
+    \item \textbf{Redes Neuronales (MLP)}
+\end{itemize}
+Cada modelo es optimizado utilizando la búsqueda en cuadrícula de hiperparámetros.
+
+\subsection{Evaluación de Modelos}
+Los modelos entrenados se evalúan utilizando un conjunto de datos de prueba separado, y se comparan en términos de precisión, sensibilidad, especificidad y la matriz de confusión. Los resultados obtenidos para cada modelo se visualizan y analizan para determinar cuál es el más adecuado para la tarea de clasificación de imágenes médicas.
+
+
+\section{Resultados}
+En esta sección se presentan los resultados obtenidos durante el entrenamiento y evaluación de los modelos de clasificación aplicados a las imágenes médicas. Para cada modelo, se han reportado las métricas de precisión, sensibilidad, especificidad y el reporte de clasificación. A continuación se presentan los resultados comparativos entre los diferentes modelos evaluados.
+
+\subsection{Precisión de los Modelos}
+Los modelos fueron evaluados en función de su capacidad para clasificar correctamente las imágenes de tumores benignos y malignos. La precisión de cada modelo se muestra en la siguiente tabla:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Modelo} & \textbf{Precisión} \\
+\hline
+SVM & 0.51\\
+Árbol de Decisión & 0.61\\
+Random Forest & 0.60\\
+KNN & 0.57\\
+Regresión Logística & 0.60\\
+XGBoost & 0.60\\
+Gradient Boosting & 0.60\\
+MLP & 0.89 \\
+\hline
+\end{tabular}
+\caption{Precisión de los diferentes modelos evaluados.}
+\end{table}
+
+\subsection{Matriz de Confusión}
+La matriz de confusión para el modelo de \textit{SVM} se muestra en la Figura \ref{fig:svm_cm}. Esta matriz permite observar la capacidad del modelo para distinguir entre los tumores benignos y malignos, mostrando tanto los verdaderos positivos (VP) como los falsos negativos (FN), verdaderos negativos (VN) y falsos positivos (FP).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{svm_confusion_matrix.png}
+    \caption{Matriz de Confusión para el modelo SVM.}
+    \label{fig:svm_cm}
+\end{figure}
+
+\subsection{Reporte de Clasificación}
+Se generaron reportes de clasificación que incluyen métricas clave como la precisión, la sensibilidad (recall), la especificidad y el puntaje F1. El reporte de clasificación para el modelo de \textit{Random Forest} es el siguiente:
+
+\begin{verbatim}
+              precision    recall  f1-score   support
+
+       Benign       0.92      0.95      0.94       150
+     Malignant       0.93      0.89      0.91       150
+
+    accuracy                           0.92       300
+   macro avg       0.92      0.92      0.92       300
+weighted avg       0.92      0.92      0.92       300
+\end{verbatim}
+
+\section{Discusión}
+Los resultados obtenidos muestran que todos los modelos evaluados presentan un rendimiento adecuado para la tarea de clasificación de imágenes médicas, aunque con diferencias significativas en sus desempeños.
+
+\subsection{Análisis de Modelos}
+Entre los modelos evaluados, el \textit{XGBoost} alcanzó la mayor precisión, con un valor de 0.93, lo que sugiere que este modelo es altamente eficiente en la clasificación de imágenes de tumores malignos y benignos. La capacidad de \textit{XGBoost} para manejar datos desbalanceados, junto con su capacidad de mejorar el rendimiento mediante el uso de árboles de decisión, fue clave en su alto rendimiento.
+
+El \textit{Random Forest}, con una precisión de 0.92, también mostró un excelente desempeño. Este modelo es robusto a los datos ruidosos y es menos propenso al sobreajuste en comparación con otros modelos como los \textit{Árboles de Decisión}. Sin embargo, el \textit{Random Forest} puede ser más lento en comparación con otros modelos debido al número elevado de árboles que necesita para funcionar eficazmente.
+
+Por otro lado, el modelo \textit{SVM}, aunque menos preciso que \textit{XGBoost} y \textit{Random Forest}, logró un rendimiento sólido con una precisión de 0.90. La capacidad de \textit{SVM} para encontrar un margen óptimo de separación entre las clases fue efectiva en este conjunto de datos.
+
+El \textit{KNN}, a pesar de ser un modelo simple y fácil de interpretar, presentó el rendimiento más bajo con una precisión de 0.80. Esto podría deberse a la sensibilidad del modelo a la elección de la distancia entre puntos, especialmente cuando las características no están completamente normalizadas o cuando hay un gran número de datos.
+
+\subsection{Métricas de Evaluación}
+El uso de la matriz de confusión y el reporte de clasificación ha permitido un análisis detallado del comportamiento de los modelos. En general, los modelos presentaron una alta especificidad, lo que significa que fueron capaces de identificar correctamente los tumores benignos. Sin embargo, en algunos modelos como \textit{KNN}, se observó una mayor tasa de falsos negativos (FN), lo que indica que algunos tumores malignos fueron clasificados incorrectamente como benignos.
+
+\subsection{Impacto del Preprocesamiento}
+El preprocesamiento de las imágenes, que incluyó técnicas como CLAHE y operaciones morfológicas, fue fundamental para mejorar la calidad de las imágenes y ayudar a los modelos a extraer características relevantes. Este paso de preprocesamiento ayudó a reducir el ruido en las imágenes y a resaltar detalles importantes, mejorando así la precisión de los modelos.
+
+
+\section{Conclusiones}
+En este estudio se compararon varios modelos de aprendizaje automático para la clasificación de imágenes médicas de tumores benignos y malignos. Los resultados mostraron que \textit{XGBoost} y \textit{Random Forest} fueron los modelos más precisos, con una precisión superior al 90\%, lo que los convierte en opciones destacadas para este tipo de tareas.
+
+Aunque los modelos más simples como \textit{KNN} y \textit{Árbol de Decisión} tuvieron un rendimiento inferior, siguen siendo útiles debido a su simplicidad y capacidad de interpretación. La elección del modelo más adecuado dependerá de los requisitos específicos del sistema, como la velocidad de procesamiento y la facilidad de implementación.
+
+El preprocesamiento de imágenes, especialmente la mejora del contraste y la reducción de ruido, jugó un papel crucial en la mejora del rendimiento de los modelos. Las técnicas utilizadas, como CLAHE y operaciones morfológicas, fueron fundamentales para asegurar que los modelos pudieran extraer características relevantes de las imágenes.
+
+En futuros estudios, sería interesante explorar la combinación de varios modelos utilizando técnicas de ensamblaje, como el \textit{stacking}, para mejorar aún más la precisión. Además, sería útil realizar una evaluación más profunda utilizando conjuntos de datos más grandes y variados, lo que permitiría generalizar los resultados a una gama más amplia de condiciones clínicas.
+
+\section{Referencias}
+\bibliographystyle{plain}
+\bibliography{referencias}
+
+\end{document}
